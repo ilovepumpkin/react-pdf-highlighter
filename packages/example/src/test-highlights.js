@@ -1,5 +1,75 @@
+const rawData = {
+  "1": "(332.0,81.0,696.0,518.0)",
+  "2": "(89.0,80.0,543.0,517.0)",
+  "3": "(89.0,81.0,686.0,518.0)",
+  "4": "(89.0,80.0,714.0,517.0)",
+  "5": "(89.0,80.0,725.0,517.0)",
+  "6": "(89.0,80.0,654.0,517.0)",
+  "7": "(89.0,80.0,670.0,517.0)",
+  "8": "(89.0,81.0,660.0,518.0)",
+  "9": "(89.0,80.0,699.0,517.0)",
+  "10": "(89.0,80.0,688.0,517.0)",
+  "11": "(89.0,80.0,723.0,517.0)",
+  "12": "(89.0,80.0,708.0,517.0)",
+  "13": "(89.0,81.0,695.0,518.0)",
+  "14": "(89.0,80.0,673.0,517.0)",
+  "15": "(89.0,80.0,601.0,517.0)",
+  "16": "(89.0,80.0,601.0,517.0)",
+  "17": "(89.0,80.0,529.0,517.0)",
+  "18": "(234.0,80.0,596.0,517.0)",
+  "19": "(89.0,80.0,696.0,517.0)",
+  "20": "(89.0,80.0,720.0,517.0)",
+  "21": "(89.0,80.0,728.0,517.0)",
+  "22": "(89.0,80.0,681.0,517.0)",
+  "23": "(89.0,80.0,709.0,517.0)",
+  "24": "(89.0,80.0,719.0,517.0)",
+  "25": "(89.0,80.0,691.0,517.0)",
+  "26": "(89.0,80.0,464.0,517.0)",
+  "27": "(183.0,80.0,642.0,517.0)"
+};
+
+// const pageWidth = 991.6666666666666;
+// const pageHeight = 1403.3333333333333;
+// const xOffset = 20;
+// const yOffset = 130;
+
+const highlightData = Object.entries(rawData).map(
+  ([pageNum, tableData], index) => {
+    const rectData = tableData
+      .substring(1, tableData.length - 1)
+      .split(",")
+      // .map(x => +x * 1.6673003199949308);
+      .map(x => +x);
+    const [y1, x1, y2, x2] = rectData;
+
+    const tableRectData = {
+      x1,
+      y1,
+      x2,
+      y2
+      // width: pageWidth,
+      // height: pageHeight
+    };
+    return {
+      content: {
+        image: "xxx"
+      },
+      position: {
+        boundingRect: tableRectData,
+        rects: [],
+        pageNumber: +pageNum
+      },
+      comment: {
+        // text: 'Flow or TypeScript?",
+        // emoji: "🔥"
+      },
+      id: index + ""
+    };
+  }
+);
 const testHighlights = {
-  "https://arxiv.org/pdf/1708.08021.pdf": [
+  "http://localhost:3000/TS_Drive_SIEMENS_SIMOVERT_vc33_kopl_dcac_e.pdf": highlightData,
+  "http://localhost:3000/1708.08021.pdf": [
     {
       content: {
         text: " Type Checking for JavaScript"

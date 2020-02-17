@@ -49,7 +49,9 @@ const HighlightPopup = ({ comment }) =>
     </div>
   ) : null;
 
-const DEFAULT_URL = "https://arxiv.org/pdf/1708.08021.pdf";
+let DEFAULT_URL = "http://localhost:3000/1708.08021.pdf";
+DEFAULT_URL =
+  "http://localhost:3000/TS_Drive_SIEMENS_SIMOVERT_vc33_kopl_dcac_e.pdf";
 
 const searchParams = new URLSearchParams(document.location.search);
 const url = searchParams.get("url") || DEFAULT_URL;
@@ -119,6 +121,7 @@ class App extends Component<Props, State> {
 
   render() {
     const { highlights } = this.state;
+    console.log(">>>>", highlights);
 
     return (
       <div className="App" style={{ display: "flex", height: "100vh" }}>
@@ -195,10 +198,12 @@ class App extends Component<Props, State> {
                   return (
                     <Popup
                       popupContent={<HighlightPopup {...highlight} />}
-                      onMouseOver={popupContent =>
-                        setTip(highlight, highlight => popupContent)
-                      }
-                      onMouseOut={hideTip}
+                      // onMouseOver={popupContent =>
+                      //   setTip(highlight, highlight => popupContent)
+                      // }
+                      // onMouseOut={hideTip}
+                      onMouseOver={() => {}}
+                      onMouseOut={() => {}}
                       key={index}
                       children={component}
                     />

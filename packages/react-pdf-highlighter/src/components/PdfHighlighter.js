@@ -200,6 +200,15 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }: T_ScaledPosition): T_Position {
     const viewport = this.viewer.getPageView(pageNumber - 1).viewport;
 
+    //======RUI======================
+    console.log("******scaledPositionToViewport:", viewport);
+    const { width, height, scale } = viewport;
+    if (!boundingRect.width && !boundingRect.height) {
+      boundingRect.width = width / scale;
+      boundingRect.height = height / scale;
+    }
+    //======RUI=======================
+
     return {
       boundingRect: scaledToViewport(boundingRect, viewport, usePdfCoordinates),
       rects: (rects || []).map(rect =>
@@ -215,6 +224,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     rects
   }: T_Position): T_ScaledPosition {
     const viewport = this.viewer.getPageView(pageNumber - 1).viewport;
+    console.log("******viewportPositionToScaled:", viewport);
 
     return {
       boundingRect: viewportToScaled(boundingRect, viewport),
